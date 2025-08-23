@@ -183,33 +183,6 @@ spec:
               └─────────────────────────────┘
 ```
 
-## Структура файлов
-
-```
-.
-├── cluster-manifests.yaml    # Основные манифесты кластера
-├── README.md                 # Данный файл
-└── docs/                     # Дополнительная документация
-    ├── networking.md         # Настройка сети
-    ├── security.md           # Рекомендации по безопасности
-    └── troubleshooting.md    # Подробное руководство по устранению неисправностей
-```
-
-## Мониторинг и обслуживание
-
-### Регулярные проверки
-```bash
-# Проверка состояния узлов
-kubectl get nodes -o wide
-
-# Проверка состояния подов системы
-kubectl get pods -n kube-system
-
-# Проверка ресурсов кластера
-kubectl top nodes
-kubectl top pods -A
-```
-
 ### Обновление кластера
 ```bash
 # Обновление версии Kubernetes
@@ -221,39 +194,6 @@ kubectl patch kubeadmcontrolplane myCluster-control-plane \
 kubectl patch machinedeployment myCluster-workers \
   --type='merge' \
   -p='{"spec":{"template":{"spec":{"version":"v1.32.1"}}}}'
-```
-
-### Резервное копирование
-```bash
-# Создание резервной копии etcd (выполнить на control plane узле)
-sudo etcdctl snapshot save /tmp/etcd-backup.db \
-  --endpoints=https://127.0.0.1:2379 \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
-  --cert=/etc/kubernetes/pki/etcd/server.crt \
-  --key=/etc/kubernetes/pki/etcd/server.key
-```
-
-## Безопасность
-
-### Рекомендации
-- Регулярно обновляйте SSH ключи
-- Используйте сетевые политики для изоляции подов
-- Настройте RBAC для ограничения доступа
-- Включите аудит логирование
-- Используйте Pod Security Standards
-
-### Пример сетевой политики
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: deny-all
-  namespace: default
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
-  - Egress
 ```
 
 ## Лицензия
