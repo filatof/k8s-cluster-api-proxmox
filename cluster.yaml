@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: myproxmoxcluster
+  name: myCluster
   namespace: default
 spec:
   clusterNetwork:
@@ -11,16 +11,16 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
-    name: myproxmoxcluster-control-plane
+    name: myCluster-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: ProxmoxCluster
-    name: myproxmoxcluster
+    name: myCluster
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxCluster
 metadata:
-  name: myproxmoxcluster
+  name: myCluster
   namespace: default
 spec:
   schedulerHints:
@@ -42,7 +42,7 @@ spec:
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlane
 metadata:
-  name: myproxmoxcluster-control-plane
+  name: myCluster-control-plane
   namespace: default
 spec:
   kubeadmConfigSpec:
@@ -163,19 +163,19 @@ spec:
     users:
     - name: root
       sshAuthorizedKeys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaRT9ftaSh0XdrIkO3VIk78v37j1pGrl4J8wrSlsfTr fill@k3s-control-plane
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlPFhFwKepToM3D/5wgUfFsPsv99sZkfUr9gnuhYYr/ fill@MacBookAir.local
   machineTemplate:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
       kind: ProxmoxMachineTemplate
-      name: myproxmoxcluster-control-plane
+      name: myCluster-control-plane
   replicas: 1
   version: v1.32.0
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: myproxmoxcluster-control-plane
+  name: myCluster-control-plane
   namespace: default
 spec:
   template:
@@ -199,10 +199,10 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: myproxmoxcluster-workers
+  name: myCluster-workers
   namespace: default
 spec:
-  clusterName: myproxmoxcluster
+  clusterName: myCluster
   replicas: 1
   selector:
     matchLabels: null
@@ -215,18 +215,18 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: myproxmoxcluster-worker
-      clusterName: myproxmoxcluster
+          name: myCluster-worker
+      clusterName: myCluster
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
         kind: ProxmoxMachineTemplate
-        name: myproxmoxcluster-worker
+        name: myCluster-worker
       version: v1.32.0
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: myproxmoxcluster-worker
+  name: myCluster-worker
   namespace: default
 spec:
   template:
@@ -250,7 +250,7 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: myproxmoxcluster-worker
+  name: myCluster-worker
   namespace: default
 spec:
   template:
@@ -262,4 +262,4 @@ spec:
       users:
       - name: root
         sshAuthorizedKeys:
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaRT9ftaSh0XdrIkO3VIk78v37j1pGrl4J8wrSlsfTr fill@k3s-control-plane
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlPFhFwKepToM3D/5wgUfFsPsv99sZkfUr9gnuhYYr/ fill@MacBookAir.local
