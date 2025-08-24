@@ -5,6 +5,7 @@ resources:
 - cluster
 - control-plane
 - workers
+- cni/cilium
 
 commonLabels:
   cluster.x-k8s.io/cluster-name: mycluster
