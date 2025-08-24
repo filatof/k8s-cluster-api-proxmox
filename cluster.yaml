@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: myCluster
+  name: mycluster
   namespace: default
 spec:
   clusterNetwork:
@@ -11,16 +11,16 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
-    name: myCluster-control-plane
+    name: mycluster-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: ProxmoxCluster
-    name: myCluster
+    name: mycluster
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxCluster
 metadata:
-  name: myCluster
+  name: mycluster
   namespace: default
 spec:
   schedulerHints:
@@ -42,7 +42,7 @@ spec:
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlane
 metadata:
-  name: myCluster-control-plane
+  name: mycluster-control-plane
   namespace: default
 spec:
   kubeadmConfigSpec:
@@ -168,14 +168,14 @@ spec:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
       kind: ProxmoxMachineTemplate
-      name: myCluster-control-plane
+      name: mycluster-control-plane
   replicas: 1
   version: v1.32.0
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: myCluster-control-plane
+  name: mycluster-control-plane
   namespace: default
 spec:
   template:
@@ -199,10 +199,10 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: myCluster-workers
+  name: mycluster-workers
   namespace: default
 spec:
-  clusterName: myCluster
+  clusterName: mycluster
   replicas: 1
   selector:
     matchLabels: null
@@ -215,12 +215,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: myCluster-worker
-      clusterName: myCluster
+          name: mycluster-worker
+      clusterName: mycluster
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
         kind: ProxmoxMachineTemplate
-        name: myCluster-worker
+        name: mycluster-worker
       version: v1.32.0
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
@@ -250,7 +250,7 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: myCluster-worker
+  name: mycluster-worker
   namespace: default
 spec:
   template:
