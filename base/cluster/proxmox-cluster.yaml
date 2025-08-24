@@ -1,0 +1,21 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: ProxmoxCluster
+metadata:
+  name: mycluster
+  namespace: default
+spec:
+  schedulerHints:
+    memoryAdjustment: 0
+  allowedNodes:
+  - pimox2
+  controlPlaneEndpoint:
+    host: 192.168.1.30
+    port: 6443
+  dnsServers:
+  - 8.8.8.8
+  - 8.8.4.4
+  ipv4Config:
+    addresses:
+    - 192.168.1.31-192.168.1.39
+    gateway: 192.168.1.1
+    prefix: 24
