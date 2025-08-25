@@ -9,7 +9,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: cluster-proxmox       # это GitRepository, который указывает на твой репо с base/overlays/cni
+    name: cluster-proxmox       
     namespace: flux-system
   dependsOn:
-    - name: cluster-proxmox-dev # сначала кластер, потом cni
+    - name: cluster-proxmox-dev 
