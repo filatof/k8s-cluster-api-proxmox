@@ -5,7 +5,9 @@ namePrefix: dev-
 nameSuffix: ""
 
 resources:
-- ../../base
+- ../../base/cluster
+- ../../base/control-plane
+- ../../base/workers
 
 patchesStrategicMerge:
 - cluster-patch.yaml
