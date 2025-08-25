@@ -4,8 +4,8 @@ metadata:
   name: calico
   namespace: flux-system
 spec:
-  interval: 10m
-  path: ./base/cni/calico
+  interval: 1m
+  path: ./cni/calico
   prune: true
   sourceRef:
     kind: GitRepository
