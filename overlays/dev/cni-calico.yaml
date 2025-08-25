@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: calico
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./cni/calico
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: cluster-proxmox       # это GitRepository, который указывает на твой репо с base/overlays/cni
+    namespace: flux-system
+  dependsOn:
+    - name: cluster-proxmox-dev # сначала кластер, потом cni
