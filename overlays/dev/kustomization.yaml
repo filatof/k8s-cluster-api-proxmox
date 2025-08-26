@@ -1,89 +1,26 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: default
+
+# Убираем namePrefix - будем использовать явные имена в патчах
 # namePrefix: dev-
-# nameSuffix: ""
+
+# Исправляем labels (вместо commonLabels)
+labels:
+- pairs:
+    environment: dev
+    cluster.x-k8s.io/cluster-name: dev-mycluster
 
 resources:
 - ../../base
 
-patchesStrategicMerge:
-- cluster-patch.yaml
-- control-plane-patch.yaml
-- workers-patch.yaml
-
-commonLabels:
-  environment: dev
-  cluster.x-k8s.io/cluster-name: dev-mycluster
-
+# Исправляем patches (вместо patchesStrategicMerge)
 patches:
-- target:
-    kind: Cluster
-    name: mycluster
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster
-    - op: replace
-      path: /spec/controlPlaneRef/name
-      value: dev-mycluster-control-plane
-    - op: replace
-      path: /spec/infrastructureRef/name
-      value: dev-mycluster
-- target:
-    kind: ProxmoxCluster
-    name: mycluster
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster
-- target:
-    kind: KubeadmControlPlane
-    name: mycluster-control-plane
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster-control-plane
-    - op: replace
-      path: /spec/machineTemplate/infrastructureRef/name
-      value: dev-mycluster-control-plane
-- target:
-    kind: ProxmoxMachineTemplate
-    name: mycluster-control-plane
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster-control-plane
-- target:
-    kind: MachineDeployment
-    name: mycluster-workers
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster-workers
-    - op: replace
-      path: /spec/clusterName
-      value: dev-mycluster
-    - op: replace
-      path: /spec/template/spec/clusterName
-      value: dev-mycluster
-    - op: replace
-      path: /spec/template/spec/bootstrap/configRef/name
-      value: dev-mycluster-worker
-    - op: replace
-      path: /spec/template/spec/infrastructureRef/name
-      value: dev-mycluster-worker
-- target:
-    kind: ProxmoxMachineTemplate
-    name: mycluster-worker
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster-worker
-- target:
-    kind: KubeadmConfigTemplate
-    name: mycluster-worker
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: dev-mycluster-worker
+- path: cluster-patch.yaml
+- path: cluster-name-patch.yaml
+- path: controlplane-name-patch.yaml
+- path: machinetemplate-cp-name-patch.yaml
+- path: machinetemplate-worker-name-patch.yaml
+- path: machinedeployment-name-patch.yaml
+- path: kubeadmconfigtemplate-name-patch.yaml
