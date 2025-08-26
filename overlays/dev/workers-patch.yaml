@@ -4,6 +4,7 @@ metadata:
   name: myproxmoxcluster-workers
 spec:
   replicas: 1
+  clusterName: dev-myproxmoxcluster
   template:
     spec:
       bootstrap:
