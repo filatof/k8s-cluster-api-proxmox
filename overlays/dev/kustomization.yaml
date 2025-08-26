@@ -19,4 +19,4 @@ resources:
 patches:
 - path: cluster-patch.yaml
 - path: control-plane-patch.yaml
-- path: worker-patch.yaml
+- path: workers-patch.yaml
