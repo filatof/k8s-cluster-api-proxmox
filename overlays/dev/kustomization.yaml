@@ -18,9 +18,5 @@ resources:
 # Исправляем patches (вместо patchesStrategicMerge)
 patches:
 - path: cluster-patch.yaml
-- path: cluster-name-patch.yaml
-- path: controlplane-name-patch.yaml
-- path: machinetemplate-cp-name-patch.yaml
-- path: machinetemplate-worker-name-patch.yaml
-- path: machinedeployment-name-patch.yaml
-- path: kubeadmconfigtemplate-name-patch.yaml
+- path: control-plane-patch.yaml
+- path: worker-patch.yaml
