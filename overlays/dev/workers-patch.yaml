@@ -5,11 +5,16 @@ metadata:
   namespace: default
 spec:
   replicas: 1
+  clusterName: dev-mycluster
+  template:
+    spec:
+      infrastructureRef:
+        name: dev-mycluster-worker
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: mycluster-worker
+  name: dev-mycluster-worker
   namespace: default
 spec:
   template:
