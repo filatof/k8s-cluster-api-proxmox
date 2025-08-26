@@ -1,19 +1,14 @@
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlane
 metadata:
-  name: dev-mycluster-control-plane
-  namespace: default
+  name: myproxmoxcluster-control-plane
 spec:
   replicas: 1
-  machineTemplate:
-    infrastructureRef:
-      name: dev-mycluster-control-plane
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: dev-mycluster-control-plane
-  namespace: default
+  name: myproxmoxcluster-control-plane
 spec:
   template:
     spec:
@@ -21,4 +16,4 @@ spec:
       numCores: 2
       disks:
         bootVolume:
-          sizeGb: 20
+          sizeGb: 30

@@ -7,4 +7,4 @@ resources:
 - workers
 
 commonLabels:
-  cluster.x-k8s.io/cluster-name: mycluster
+  cluster.x-k8s.io/cluster-name: myproxmoxcluster

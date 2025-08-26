@@ -1,11 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namePrefix: prod-
-nameSuffix: ""
+namespace: cluster-api-prod
 
 resources:
 - ../../base
+
+namePrefix: prod-
 
 patchesStrategicMerge:
 - cluster-patch.yaml
@@ -14,76 +15,3 @@ patchesStrategicMerge:
 
 commonLabels:
   environment: prod
-  cluster.x-k8s.io/cluster-name: prod-mycluster
-
-patches:
-- target:
-    kind: Cluster
-    name: mycluster
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster
-    - op: replace
-      path: /spec/controlPlaneRef/name
-      value: prod-mycluster-control-plane
-    - op: replace
-      path: /spec/infrastructureRef/name
-      value: prod-mycluster
-- target:
-    kind: ProxmoxCluster
-    name: mycluster
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster
-- target:
-    kind: KubeadmControlPlane
-    name: mycluster-control-plane
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster-control-plane
-    - op: replace
-      path: /spec/machineTemplate/infrastructureRef/name
-      value: prod-mycluster-control-plane
-- target:
-    kind: ProxmoxMachineTemplate
-    name: mycluster-control-plane
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster-control-plane
-- target:
-    kind: MachineDeployment
-    name: mycluster-workers
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster-workers
-    - op: replace
-      path: /spec/clusterName
-      value: prod-mycluster
-    - op: replace
-      path: /spec/template/spec/clusterName
-      value: prod-mycluster
-    - op: replace
-      path: /spec/template/spec/bootstrap/configRef/name
-      value: prod-mycluster-worker
-    - op: replace
-      path: /spec/template/spec/infrastructureRef/name
-      value: prod-mycluster-worker
-- target:
-    kind: ProxmoxMachineTemplate
-    name: mycluster-worker
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster-worker
-- target:
-    kind: KubeadmConfigTemplate
-    name: mycluster-worker
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: prod-mycluster-worker

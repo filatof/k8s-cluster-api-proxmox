@@ -1,22 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: default
-
-# Убираем namePrefix - будем использовать явные имена в патчах
-# namePrefix: dev-
-
-# Исправляем labels (вместо commonLabels)
-labels:
-- pairs:
-    environment: dev
-    cluster.x-k8s.io/cluster-name: dev-mycluster
+namespace: cluster-api-dev
 
 resources:
 - ../../base
 
-# Исправляем patches (вместо patchesStrategicMerge)
-patches:
-- path: cluster-patch.yaml
-- path: control-plane-patch.yaml
-- path: workers-patch.yaml
+namePrefix: dev-
+
+patchesStrategicMerge:
+- cluster-patch.yaml
+- control-plane-patch.yaml
+- workers-patch.yaml
+
+commonLabels:
+  environment: dev

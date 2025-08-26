@@ -1,16 +1,14 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: mycluster-workers
-  namespace: default
+  name: myproxmoxcluster-workers
 spec:
   replicas: 3
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 kind: ProxmoxMachineTemplate
 metadata:
-  name: mycluster-worker
-  namespace: default
+  name: myproxmoxcluster-worker
 spec:
   template:
     spec:
@@ -18,4 +16,4 @@ spec:
       numCores: 4
       disks:
         bootVolume:
-          sizeGb: 100
+          sizeGb: 60

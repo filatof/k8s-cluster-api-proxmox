@@ -1,10 +1,10 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: mycluster-workers
+  name: myproxmoxcluster-workers
   namespace: default
 spec:
-  clusterName: mycluster
+  clusterName: myproxmoxcluster
   replicas: 1
   selector:
     matchLabels: null
@@ -17,10 +17,10 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: mycluster-worker
-      clusterName: mycluster
+          name: myproxmoxcluster-worker
+      clusterName: myproxmoxcluster
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
         kind: ProxmoxMachineTemplate
-        name: mycluster-worker
+        name: myproxmoxcluster-worker
       version: v1.32.0

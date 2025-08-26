@@ -1,7 +1,7 @@
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlane
 metadata:
-  name: mycluster-control-plane
+  name: myproxmoxcluster-control-plane
   namespace: default
 spec:
   kubeadmConfigSpec:
@@ -122,11 +122,11 @@ spec:
     users:
     - name: root
       sshAuthorizedKeys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlPFhFwKepToM3D/5wgUfFsPsv99sZkfUr9gnuhYYr/ fill@MacBookAir.local
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaRT9ftaSh0XdrIkO3VIk78v37j1pGrl4J8wrSlsfTr fill@k3s-control-plane
   machineTemplate:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
       kind: ProxmoxMachineTemplate
-      name: mycluster-control-plane
+      name: myproxmoxcluster-control-plane
   replicas: 1
   version: v1.32.0

@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: mycluster
+  name: myproxmoxcluster
   namespace: default
 spec:
   clusterNetwork:
@@ -11,8 +11,8 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
-    name: mycluster-control-plane
+    name: myproxmoxcluster-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: ProxmoxCluster
-    name: mycluster
+    name: myproxmoxcluster

@@ -1,7 +1,7 @@
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: mycluster-worker
+  name: myproxmoxcluster-worker
   namespace: default
 spec:
   template:
@@ -13,4 +13,5 @@ spec:
       users:
       - name: root
         sshAuthorizedKeys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaRT9ftaSh0XdrIkO3VIk78v37j1pGrl4J8wrSlsfTr fill@k3s-control-plane
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlPFhFwKepToM3D/5wgUfFsPsv99sZkfUr9gnuhYYr/ fill@MacBookAir.local
