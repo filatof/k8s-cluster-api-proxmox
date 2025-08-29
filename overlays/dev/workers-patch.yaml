@@ -3,7 +3,7 @@ kind: MachineDeployment
 metadata:
   name: myproxmoxcluster-workers
 spec:
-  replicas: 1
+  replicas: 3
   clusterName: dev-myproxmoxcluster
   template:
     spec:
